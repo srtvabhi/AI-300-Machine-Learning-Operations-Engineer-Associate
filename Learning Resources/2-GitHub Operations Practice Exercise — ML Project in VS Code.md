@@ -267,6 +267,9 @@ Changes to be committed
 ```bash
 git commit -m "Initial ML project"
 ```
+Explanation :
+- Git takes the staged files and creates a commit.
+- You can think of a commit as a snapshot of your project at a particular point in time.
 
 Check the history:
 
@@ -395,9 +398,29 @@ Expected:
 
 ## Step 12: Push to GitHub
 
+
 ```bash
 git push -u origin main
 ```
+Note  : Authenticate your self via browser or access token 
+
+Step: Create a GitHub Personal Access Token (PAT)
+
+A Personal Access Token (PAT) can be used to authenticate Git operations over HTTPS.
+
+Steps
+
+1. Sign in to GitHub using your `srtvabhi` account.
+
+2. Go to:
+   **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
+
+3. Click **Generate new token**.
+
+4. Enter a token name, for example:
+   ```text
+   VS Code Git
+
 
 Refresh your GitHub repository.
 
