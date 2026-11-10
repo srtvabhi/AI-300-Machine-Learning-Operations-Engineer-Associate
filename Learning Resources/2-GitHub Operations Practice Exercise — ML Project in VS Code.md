@@ -1,5 +1,10 @@
 # GitHub Operations Practice Exercise — ML Project in VS Code
 
+| 🚀 **INTERACTIVE LEARNING EXPERIENCE** |
+| :--- |
+| 📘 Practice Git, GitHub, branches, commits, Pull Requests, and GitHub Actions with a step-by-step ML project in VS Code. |
+| 👉 **[CLICK HERE TO LAUNCH INTERACTIVE EXPERIENCE](https://srtvabhi.github.io/AI-300-Machine-Learning-Operations-Engineer-Associate/Learning%20Resources/Interactive%20Experience/Folder2/index.html)** |
+
 > **Goal:** Practice the complete GitHub workflow using a small machine-learning-style Python project.
 >
 > **Scope:** Git + GitHub + GitHub Actions only. **No Azure ML or Azure services are used.**
