@@ -1,5 +1,13 @@
 # GitHub Actions + Azure ML — Easy Definitions with Commands
 
+
+| 🚀 **INTERACTIVE LEARNING EXPERIENCE** |
+| :--- |
+| 📘 Learn GitHub Actions & Azure ML through interactive examples, commands, and quizzes. |
+| 👉 **[CLICK HERE TO LAUNCH INTERACTIVE EXPERIENCE](https://srtvabhi.github.io/AI-300-Machine-Learning-Operations-Engineer-Associate/Learning%20Resources/Interactive%20Experience/Folder1/)** |
+
+
+
 > Beginner-friendly MLOps glossary with Git, GitHub CLI, GitHub Actions, Azure ML, authentication, triggers, and practical examples.
 
 ## 1. GitHub
