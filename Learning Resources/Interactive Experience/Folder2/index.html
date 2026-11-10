@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GitHub Operations — Interactive VS Code Lab</title>
+<style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--text:#172238;--muted:#63728b;--line:#dce4ee;--accent:#2563eb;--soft:#eaf1ff;--code:#101a2c;--codefg:#e5edfa;--green:#16845b;--shadow:0 12px 36px #162c4d12}
+body.dark{color-scheme:dark;--bg:#0c1422;--panel:#152236;--text:#eef3ff;--muted:#a2b2cb;--line:#30425b;--accent:#80adff;--soft:#1b3557;--code:#08111e;--codefg:#e6f0ff;--green:#55d6a2;--shadow:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}button,input{font:inherit}button{cursor:pointer}.top{position:sticky;top:0;z-index:10;background:var(--panel);border-bottom:1px solid var(--line);padding:12px max(18px,calc((100vw - 1500px)/2));display:flex;align-items:center;gap:14px}.brand{font-weight:800;white-space:nowrap;font-size:17px}.brand span{color:var(--accent)}.search{flex:1;min-width:80px;max-width:540px;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:8px 12px;border-radius:10px}.btn:hover{border-color:var(--accent)}.layout{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1500px;margin:auto;min-height:calc(100vh - 70px)}aside{position:sticky;top:69px;height:calc(100vh - 69px);overflow:auto;border-right:1px solid var(--line);padding:22px 16px;background:var(--panel)}.sidehead{font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:var(--muted);margin:14px 8px}.navitem{display:block;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13px;line-height:1.4}.navitem:hover,.navitem.active{background:var(--soft);color:var(--accent)}.progressbar{height:9px;border-radius:99px;background:var(--line);overflow:hidden;margin:10px 0}.progressbar div{height:100%;width:0;background:var(--green);transition:width .2s}.small{font-size:12px;color:var(--muted)}main{min-width:0;padding:32px clamp(16px,4vw,64px) 80px}.hero{background:linear-gradient(120deg,#193b75,#2465b3);color:#fff;border-radius:20px;padding:28px 32px;margin-bottom:25px}.hero h1{margin:0 0 6px;font-size:clamp(25px,3vw,39px);line-height:1.2}.hero p{opacity:.9;margin:8px 0}.hero .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}.pill{background:#ffffff23;border:1px solid #ffffff40;padding:4px 11px;border-radius:99px;font-size:12px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 26px}.section{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin:0 0 16px;overflow:hidden;box-shadow:var(--shadow)}.section-head{display:flex;align-items:center;gap:10px;padding:15px 18px}.section-title{font-size:18px;font-weight:750;line-height:1.35;flex:1}.section-toggle{background:transparent;border:0;color:var(--muted);font-size:19px;padding:4px 10px}.done{accent-color:var(--green);height:18px;width:18px;cursor:pointer}.section-body{padding:0 22px 22px;border-top:1px solid var(--line)}.section.collapsed .section-body{display:none}.section.collapsed .section-toggle{transform:rotate(-90deg)}.section-body h2,.section-body h3{margin-top:24px;scroll-margin-top:90px}.section-body p,.section-body li{max-width:900px}.section-body blockquote{border-left:4px solid var(--accent);background:var(--soft);padding:8px 16px;margin:14px 0;border-radius:0 9px 9px 0}.section-body pre{position:relative;overflow:auto;background:var(--code);color:var(--codefg);border-radius:12px;padding:40px 18px 16px;line-height:1.5;font-size:13px}.section-body pre code{font:inherit;white-space:pre}.copy{position:absolute;right:10px;top:8px;border:1px solid #ffffff3d;background:#ffffff1a;color:#fff;border-radius:7px;padding:3px 10px;font-size:12px}.section-body code:not(pre code){background:var(--soft);color:var(--accent);padding:2px 5px;border-radius:5px}.section-body table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}.section-body th,.section-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}.section-body th{background:var(--soft)}.section-body hr{border:0;border-top:1px solid var(--line);margin:26px 0}.hidden{display:none!important}.empty{padding:35px;text-align:center;color:var(--muted)}.quiz{border:1px solid var(--line);background:var(--panel);padding:22px;border-radius:16px;margin-top:30px}.quiz h2{margin-top:0}.question{border-top:1px solid var(--line);padding:16px 0}.choice{display:block;margin:7px 0;cursor:pointer}.feedback{font-weight:700;margin-top:7px}.correct{color:var(--green)}.wrong{color:#e56b6b}.mobilemenu{display:none}@media(max-width:850px){.layout{display:block}aside{display:none;position:fixed;z-index:9;top:62px;left:0;width:min(320px,90vw);height:calc(100vh - 62px);box-shadow:var(--shadow)}aside.open{display:block}.mobilemenu{display:inline-block}.brand{font-size:14px}.top{gap:7px;padding:9px}.search{font-size:13px}main{padding:20px 12px 50px}.hero{padding:22px}.section-head{padding:13px}.section-title{font-size:16px}.section-body{padding:0 14px 14px}}
+</style></head><body><header class="top"><button class="btn mobilemenu" id="menu" aria-label="Open chapters">☰</button><div class="brand">⚡ <span>GitHub</span> Practice Lab</div><input id="search" class="search" placeholder="Search steps, commands, concepts…" aria-label="Search content"><button class="btn" id="theme" title="Toggle dark mode">🌙</button></header><div class="layout"><aside id="sidebar"><div class="sidehead">Your progress</div><div style="padding:0 8px"><strong id="counter">0 / 0 completed</strong><div class="progressbar"><div id="bar"></div></div><div class="small">Check each chapter as you practice.</div></div><div class="sidehead">Chapters</div><nav id="nav"></nav></aside><main><div class="hero"><h1>GitHub Operations<br>Interactive Practice Lab</h1><p>Hands-on ML-style project in VS Code: Git → GitHub → Pull Requests → GitHub Actions → Tests → Release.</p><div class="pills"><span class="pill">💻 VS Code</span><span class="pill">🐍 Python + pytest</span><span class="pill">⚙️ GitHub Actions</span><span class="pill">☁️ No Azure required</span></div></div><div class="toolbar"><button class="btn" id="expand">Expand all</button><button class="btn" id="collapse">Collapse all</button><button class="btn" id="reset">Reset progress</button><span class="small" id="match" style="align-self:center"></span></div><div id="sections"></div><div id="empty" class="empty hidden">No matching chapters. Try another keyword.</div><section class="quiz" id="quiz"><h2>🧠 Quick knowledge check</h2><p class="small">Choose an answer to see immediate feedback. This quiz is an extra practice feature; the chapters above preserve the supplied exercise.</p><div id="questions"></div><button class="btn" id="retry">Reset quiz</button></section></main></div><template id="source"><div id="original"><h1>GitHub Operations Practice Exercise — ML Project in VS Code</h1>
+<blockquote>
+<p><strong>Goal:</strong> Practice the complete GitHub workflow using a small machine-learning-style Python project.</p>
+<p><strong>Scope:</strong> Git + GitHub + GitHub Actions only. <strong>No Azure ML or Azure services are used.</strong></p>
+</blockquote>
+<hr />
+<h1>🎯 Exercise Objective</h1>
+<p>By the end of this exercise, you will practice:</p>
+<pre><code class="language-text">Create ML project locally
+        ↓
+Initialize Git
+        ↓
+Create GitHub repository
+        ↓
+Push code
+        ↓
+Create feature branch
+        ↓
+Make changes
+        ↓
+Commit + Push
+        ↓
+Create Pull Request
+        ↓
+GitHub Actions runs tests
+        ↓
+Review checks
+        ↓
+Merge PR
+        ↓
+Pull latest main
+        ↓
+Create Git tag
+        ↓
+Create GitHub Release
+</code></pre>
+<hr />
+<h1>Part 1 — Create a Small ML Project</h1>
+<h2>Step 1: Create Project Folder</h2>
+<p>Open VS Code.</p>
+<p>Create a folder:</p>
+<pre><code class="language-text">ml-github-demo
+</code></pre>
+<p>Open this folder in VS Code.</p>
+<p>Initial structure:</p>
+<pre><code class="language-text">ml-github-demo/
+</code></pre>
+<hr />
+<h2>Step 2: Create <code>train.py</code></h2>
+<p>Create:</p>
+<pre><code class="language-text">train.py
+</code></pre>
+<p>Add:</p>
+<pre><code class="language-python">def train_model():
+    print(&quot;Training ML model...&quot;)
+    accuracy = 0.92
+    print(f&quot;Model accuracy: {accuracy:.2%}&quot;)
+    return accuracy
+
+
+if __name__ == &quot;__main__&quot;:
+    train_model()
+</code></pre>
+<p>Run:</p>
+<pre><code class="language-bash">python train.py
+</code></pre>
+<p>Expected output:</p>
+<pre><code class="language-text">Training ML model...
+Model accuracy: 92.00%
+</code></pre>
+<h3>What did we just do?</h3>
+<p>We created a simple ML-style training script:</p>
+<pre><code class="language-text">train.py
+    ↓
+Training
+    ↓
+Accuracy = 92%
+</code></pre>
+<hr />
+<h1>Part 2 — Add a Test</h1>
+<h2>Step 3: Create <code>test_train.py</code></h2>
+<p>Create:</p>
+<pre><code class="language-text">test_train.py
+</code></pre>
+<p>Add:</p>
+<pre><code class="language-python">from train import train_model
+
+
+def test_train_model():
+    accuracy = train_model()
+    assert accuracy &gt;= 0.80
+</code></pre>
+<p>Install pytest if necessary:</p>
+<pre><code class="language-bash">pip install pytest
+</code></pre>
+<p>Run:</p>
+<pre><code class="language-bash">pytest
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">1 passed
+</code></pre>
+<h3>Why are we doing this?</h3>
+<p>Later, <strong>GitHub Actions will automatically run this test</strong> whenever we create or update a Pull Request.</p>
+<hr />
+<h1>Part 3 — Add <code>.gitignore</code></h1>
+<h2>Step 4: Create <code>.gitignore</code></h2>
+<p>Create:</p>
+<pre><code class="language-text">.gitignore
+</code></pre>
+<p>Add:</p>
+<pre><code class="language-text">__pycache__/
+*.pyc
+.venv/
+.env
+.vscode/
+</code></pre>
+<h3>Why?</h3>
+<p>We don't want unnecessary or sensitive files going into GitHub.</p>
+<p>For example:</p>
+<pre><code class="language-text">.env
+</code></pre>
+<p>could contain passwords, tokens, or other sensitive information.</p>
+<hr />
+<h1>Part 4 — Initialize Git</h1>
+<h2>Step 5: Check Git</h2>
+<p>In the VS Code terminal:</p>
+<pre><code class="language-bash">git --version
+</code></pre>
+<p>You should see something similar to:</p>
+<pre><code class="language-text">git version 2.x.x
+</code></pre>
+<hr />
+<h2>Step 6: Initialize the repository</h2>
+<p>Run:</p>
+<pre><code class="language-bash">git init
+</code></pre>
+<p>You should see something similar to:</p>
+<pre><code class="language-text">Initialized empty Git repository
+</code></pre>
+<p>Now check:</p>
+<pre><code class="language-bash">git status
+</code></pre>
+<p>You should see files such as:</p>
+<pre><code class="language-text">train.py
+test_train.py
+.gitignore
+</code></pre>
+<hr />
+<h1>Part 5 — First Commit</h1>
+<h2>Step 7: Add Files</h2>
+<pre><code class="language-bash">git add .
+</code></pre>
+<p>Check:</p>
+<pre><code class="language-bash">git status
+</code></pre>
+<p>You should see:</p>
+<pre><code class="language-text">Changes to be committed
+</code></pre>
+<hr />
+<h2>Step 8: Create Your First Commit</h2>
+<pre><code class="language-bash">git commit -m &quot;Initial ML project&quot;
+</code></pre>
+<p>Explanation :</p>
+<ul>
+<li>Git takes the staged files and creates a commit.</li>
+<li>You can think of a commit as a snapshot of your project at a particular point in time.</li>
+</ul>
+<p>Check the history:</p>
+<pre><code class="language-bash">git log --oneline
+</code></pre>
+<p>You should see something similar to:</p>
+<pre><code class="language-text">a82f31c Initial ML project
+</code></pre>
+<h3>Important Concept</h3>
+<pre><code class="language-text">Working files
+     ↓
+git add
+     ↓
+Staging area
+     ↓
+git commit
+     ↓
+Git history
+</code></pre>
+<hr />
+<h1>Part 6 — Create GitHub Repository</h1>
+<h2>Step 9: Create a GitHub Repository</h2>
+<p>Go to GitHub and create a new repository.</p>
+<p>Repository name:</p>
+<pre><code class="language-text">ml-github-demo
+</code></pre>
+<p>For this exercise:</p>
+<ul>
+<li>Don't add README</li>
+<li>Don't add <code>.gitignore</code></li>
+<li>Don't add a license</li>
+</ul>
+<p>We already created these locally.</p>
+<p>After creating the repository, GitHub will provide a repository URL similar to:</p>
+<pre><code class="language-text">https://github.com/YOUR-USERNAME/ml-github-demo.git
+</code></pre>
+<hr />
+<h1>Part 7 — Connect Local Git to GitHub</h1>
+<h2>Step 10: Add GitHub Remote</h2>
+<p>Replace the URL with your repository URL:</p>
+<pre><code class="language-bash">git remote add origin https://github.com/YOUR-USERNAME/ml-github-demo.git
+</code></pre>
+<p>Check:</p>
+<pre><code class="language-bash">git remote -v
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">origin  https://github.com/YOUR-USERNAME/ml-github-demo.git
+origin  https://github.com/YOUR-USERNAME/ml-github-demo.git
+</code></pre>
+<h3>What is <code>origin</code>?</h3>
+<p><code>origin</code> is the conventional name for your remote GitHub repository.</p>
+<p>Think:</p>
+<pre><code class="language-text">Local Git repository
+        │
+        │ origin
+        ↓
+GitHub repository
+</code></pre>
+<hr />
+<h1>Part 8 — Push <code>main</code></h1>
+<h2>Step 11: Make Sure Your Branch Is <code>main</code></h2>
+<p>Check:</p>
+<pre><code class="language-bash">git branch
+</code></pre>
+<p>If it shows <code>master</code>, rename it:</p>
+<pre><code class="language-bash">git branch -M main
+</code></pre>
+<p>Check again:</p>
+<pre><code class="language-bash">git branch
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">* main
+</code></pre>
+<hr />
+<h2>Step 12: Push to GitHub</h2>
+<pre><code class="language-bash">git push -u origin main
+</code></pre>
+<p>Note  : Authenticate your self via browser or access token</p>
+<p>Step: Create a GitHub Personal Access Token (PAT)</p>
+<p>A Personal Access Token (PAT) can be used to authenticate Git operations over HTTPS.</p>
+<p>Steps</p>
+<ol>
+<li><p>Sign in to GitHub using your <code>srtvabhi</code> account.</p>
+</li>
+<li><p>Go to:
+<strong>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong></p>
+</li>
+<li><p>Click <strong>Generate new token</strong>.</p>
+</li>
+<li><p>Enter a token name, for example:</p>
+<pre><code class="language-text">VS Code Git
+</code></pre>
+</li>
+</ol>
+<p>Refresh your GitHub repository.</p>
+<p>You should see:</p>
+<pre><code class="language-text">ml-github-demo
+
+├── .gitignore
+├── train.py
+└── test_train.py
+</code></pre>
+<p>🎉 Your local ML project is now on GitHub.</p>
+<hr />
+<h1>Part 9 — Create a Feature Branch</h1>
+<p>Now simulate a real developer workflow.</p>
+<h2>Step 13: Create a Feature Branch</h2>
+<p>Suppose you want to improve the training code.</p>
+<p>Run:</p>
+<pre><code class="language-bash">git switch -c feature/improve-training
+</code></pre>
+<p>Check:</p>
+<pre><code class="language-bash">git branch
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">* feature/improve-training
+  main
+</code></pre>
+<h3>Important</h3>
+<p>You are now working on:</p>
+<pre><code class="language-text">feature/improve-training
+</code></pre>
+<p>instead of directly changing:</p>
+<pre><code class="language-text">main
+</code></pre>
+<hr />
+<h1>Part 10 — Make a Code Change</h1>
+<h2>Step 14: Modify <code>train.py</code></h2>
+<p>Change:</p>
+<pre><code class="language-python">accuracy = 0.92
+</code></pre>
+<p>to:</p>
+<pre><code class="language-python">accuracy = 0.95
+</code></pre>
+<p>You can also change:</p>
+<pre><code class="language-python">print(&quot;Training ML model...&quot;)
+</code></pre>
+<p>to:</p>
+<pre><code class="language-python">print(&quot;Training improved ML model...&quot;)
+</code></pre>
+<p>Run:</p>
+<pre><code class="language-bash">python train.py
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">Training improved ML model...
+Model accuracy: 95.00%
+</code></pre>
+<p>Run the test:</p>
+<pre><code class="language-bash">pytest
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">1 passed
+</code></pre>
+<hr />
+<h1>Part 11 — Commit the Feature</h1>
+<h2>Step 15: Check Changes</h2>
+<pre><code class="language-bash">git status
+</code></pre>
+<p>Then inspect exactly what changed:</p>
+<pre><code class="language-bash">git diff
+</code></pre>
+<hr />
+<h2>Step 16: Commit</h2>
+<pre><code class="language-bash">git add train.py
+</code></pre>
+<p>Then:</p>
+<pre><code class="language-bash">git commit -m &quot;Improve model training&quot;
+</code></pre>
+<p>Check:</p>
+<pre><code class="language-bash">git log --oneline
+</code></pre>
+<p>You should see something similar to:</p>
+<pre><code class="language-text">b72c4d1 Improve model training
+a82f31c Initial ML project
+</code></pre>
+<hr />
+<h1>Part 12 — Push Feature Branch</h1>
+<h2>Step 17: Push Branch</h2>
+<pre><code class="language-bash">git push -u origin feature/improve-training
+</code></pre>
+<p>GitHub should now show your new branch.</p>
+<p>Conceptually:</p>
+<pre><code class="language-text">GitHub
+
+main
+ │
+ └── feature/improve-training
+</code></pre>
+<hr />
+<h1>Part 13 — Create Pull Request</h1>
+<h2>Step 18: Open GitHub</h2>
+<p>Go to your repository.</p>
+<p>Click:</p>
+<p><strong>Compare &amp; pull request</strong></p>
+<p>Set:</p>
+<pre><code class="language-text">base: main
+
+compare: feature/improve-training
+</code></pre>
+<p>PR title:</p>
+<pre><code class="language-text">Improve model training
+</code></pre>
+<p>Description:</p>
+<pre><code class="language-text">Updated the training logic and improved the reported accuracy.
+</code></pre>
+<p>Create the Pull Request.</p>
+<hr />
+<h1>Part 14 — Add GitHub Actions</h1>
+<p>Now introduce automation.</p>
+<p>Create this folder:</p>
+<pre><code class="language-text">.github/workflows/
+</code></pre>
+<p>Inside it create:</p>
+<pre><code class="language-text">tests.yml
+</code></pre>
+<p>Your project becomes:</p>
+<pre><code class="language-text">ml-github-demo/
+│
+├── train.py
+├── test_train.py
+├── .gitignore
+│
+└── .github/
+    └── workflows/
+        └── tests.yml
+</code></pre>
+<hr />
+<h1>Part 15 — Create GitHub Actions Workflow</h1>
+<h2>Step 19: Add Workflow</h2>
+<p>Put this into <code>tests.yml</code>:</p>
+<pre><code class="language-yaml">name: Python Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: &quot;3.11&quot;
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run tests
+        run: pytest
+</code></pre>
+<hr />
+<h1>🎓 Understand the Workflow</h1>
+<h2><code>name</code></h2>
+<pre><code class="language-yaml">name: Python Tests
+</code></pre>
+<p>This is the workflow name.</p>
+<hr />
+<h2><code>on</code></h2>
+<pre><code class="language-yaml">on:
+  pull_request:
+</code></pre>
+<p>This means:</p>
+<blockquote>
+<p>Start the workflow when a Pull Request event occurs.</p>
+</blockquote>
+<p>We also have:</p>
+<pre><code class="language-yaml">push:
+  branches:
+    - main
+</code></pre>
+<p>Meaning:</p>
+<blockquote>
+<p>Run the workflow when code is pushed to <code>main</code>.</p>
+</blockquote>
+<hr />
+<h2><code>jobs</code></h2>
+<pre><code class="language-yaml">jobs:
+  test:
+</code></pre>
+<p>We created a job called:</p>
+<pre><code class="language-text">test
+</code></pre>
+<hr />
+<h2><code>runs-on</code></h2>
+<pre><code class="language-yaml">runs-on: ubuntu-latest
+</code></pre>
+<p>This specifies the runner.</p>
+<p>Think:</p>
+<pre><code class="language-text">GitHub
+   ↓
+GitHub Actions
+   ↓
+Ubuntu virtual machine
+</code></pre>
+<hr />
+<h2><code>steps</code></h2>
+<pre><code class="language-yaml">steps:
+</code></pre>
+<p>These are individual tasks:</p>
+<pre><code class="language-text">Step 1 → Checkout code
+Step 2 → Setup Python
+Step 3 → Install pytest
+Step 4 → Run tests
+</code></pre>
+<hr />
+<h1>Part 16 — Commit the Workflow</h1>
+<h2>Step 20</h2>
+<p>Check:</p>
+<pre><code class="language-bash">git status
+</code></pre>
+<p>Add the workflow:</p>
+<pre><code class="language-bash">git add .github/workflows/tests.yml
+</code></pre>
+<p>Commit:</p>
+<pre><code class="language-bash">git commit -m &quot;Add automated tests&quot;
+</code></pre>
+<p>Push:</p>
+<pre><code class="language-bash">git push
+</code></pre>
+<p>Because you are already tracking the feature branch, <code>git push</code> is enough.</p>
+<hr />
+<h1>Part 17 — Watch GitHub Actions</h1>
+<p>Go to your GitHub repository.</p>
+<p>Click:</p>
+<p><strong>Actions</strong></p>
+<p>You should see:</p>
+<pre><code class="language-text">Python Tests
+    ↓
+Running
+    ↓
+Success
+</code></pre>
+<p>Click the workflow.</p>
+<p>You will see:</p>
+<pre><code class="language-text">test
+ ├── Checkout code
+ ├── Set up Python
+ ├── Install pytest
+ └── Run tests
+</code></pre>
+<p>🎉 You have created your first GitHub Actions workflow.</p>
+<hr />
+<h1>Part 18 — Understand the Complete PR Flow</h1>
+<p>Your current flow is:</p>
+<pre><code class="language-text">Developer
+    ↓
+Feature Branch
+    ↓
+Code Change
+    ↓
+Commit
+    ↓
+Push
+    ↓
+Pull Request
+    ↓
+GitHub Actions
+    ↓
+pytest
+    ↓
+PASS
+</code></pre>
+<p>This is the <strong>quality gate</strong> concept.</p>
+<hr />
+<h1>Part 19 — Test a Failure</h1>
+<p>This is an important exercise.</p>
+<p>Change your test:</p>
+<pre><code class="language-python">assert accuracy &gt;= 0.99
+</code></pre>
+<p>Your model accuracy is:</p>
+<pre><code class="language-text">0.95
+</code></pre>
+<p>Therefore:</p>
+<pre><code class="language-text">0.95 &gt;= 0.99
+</code></pre>
+<p>is false.</p>
+<p>Commit:</p>
+<pre><code class="language-bash">git add test_train.py
+git commit -m &quot;Test stricter accuracy requirement&quot;
+git push
+</code></pre>
+<p>Go back to GitHub Actions.</p>
+<p>You should see:</p>
+<pre><code class="language-text">Python Tests
+     ↓
+Failed
+</code></pre>
+<p>Click the failed job.</p>
+<p>You will see the failed test.</p>
+<h3>Why is this important?</h3>
+<p>The workflow detected a problem <strong>before the code reaches <code>main</code></strong>.</p>
+<p>This is the basic idea behind a CI quality gate.</p>
+<hr />
+<h1>Part 20 — Fix the Test</h1>
+<p>Change:</p>
+<pre><code class="language-python">assert accuracy &gt;= 0.99
+</code></pre>
+<p>back to:</p>
+<pre><code class="language-python">assert accuracy &gt;= 0.80
+</code></pre>
+<p>Run locally:</p>
+<pre><code class="language-bash">pytest
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">1 passed
+</code></pre>
+<p>Commit:</p>
+<pre><code class="language-bash">git add test_train.py
+git commit -m &quot;Fix accuracy test&quot;
+git push
+</code></pre>
+<p>GitHub Actions automatically runs again.</p>
+<p>Expected:</p>
+<pre><code class="language-text">Passed
+</code></pre>
+<hr />
+<h1>Part 21 — Merge the Pull Request</h1>
+<p>Go back to your Pull Request.</p>
+<p>You should see:</p>
+<pre><code class="language-text">Checks passed
+</code></pre>
+<p>Click:</p>
+<p><strong>Merge pull request</strong></p>
+<p>Then:</p>
+<p><strong>Confirm merge</strong></p>
+<p>Your change is now in:</p>
+<pre><code class="language-text">main
+</code></pre>
+<hr />
+<h1>Part 22 — Update Your Local Main</h1>
+<p>Switch back:</p>
+<pre><code class="language-bash">git switch main
+</code></pre>
+<p>Pull the latest code:</p>
+<pre><code class="language-bash">git pull origin main
+</code></pre>
+<p>Your local <code>main</code> now contains the merged change.</p>
+<hr />
+<h1>Part 23 — Delete the Feature Branch</h1>
+<p>After merging, the feature branch is no longer needed.</p>
+<p>Delete the local branch:</p>
+<pre><code class="language-bash">git branch -d feature/improve-training
+</code></pre>
+<p>Delete the remote branch if it still exists:</p>
+<pre><code class="language-bash">git push origin --delete feature/improve-training
+</code></pre>
+<h3>Short-lived branch workflow</h3>
+<pre><code class="language-text">Create branch
+      ↓
+Make change
+      ↓
+PR
+      ↓
+Merge
+      ↓
+Delete branch
+</code></pre>
+<hr />
+<h1>Part 24 — Create a Git Tag</h1>
+<p>Now practice Git tags.</p>
+<p>Suppose this is your first stable version.</p>
+<p>Create:</p>
+<pre><code class="language-bash">git tag v1.0.0
+</code></pre>
+<p>Check:</p>
+<pre><code class="language-bash">git tag
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">v1.0.0
+</code></pre>
+<p>Push the tag:</p>
+<pre><code class="language-bash">git push origin v1.0.0
+</code></pre>
+<p>Now GitHub has:</p>
+<pre><code class="language-text">v1.0.0
+   ↓
+Specific commit
+   ↓
+Specific version of your ML code
+</code></pre>
+<hr />
+<h1>Part 25 — Optional: Create a GitHub Release</h1>
+<p>Using GitHub CLI:</p>
+<pre><code class="language-bash">gh release create v1.0.0 \
+  --title &quot;Version 1.0.0&quot; \
+  --notes &quot;First stable ML project version.&quot;
+</code></pre>
+<p>Check releases:</p>
+<pre><code class="language-bash">gh release list
+</code></pre>
+<p>Now you have practiced:</p>
+<pre><code class="language-text">Git tag
+   ↓
+GitHub Release
+</code></pre>
+<hr />
+<h1>🧪 Final Project Structure</h1>
+<p>At the end, your repository should look approximately like:</p>
+<pre><code class="language-text">ml-github-demo/
+│
+├── train.py
+├── test_train.py
+├── .gitignore
+│
+└── .github/
+    └── workflows/
+        └── tests.yml
+</code></pre>
+<hr />
+<h1>📚 What You Practiced</h1>
+<table>
+<thead>
+<tr>
+  <th>Concept</th>
+  <th>What you did</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Git repository</td>
+  <td><code>git init</code></td>
+</tr>
+<tr>
+  <td>GitHub repository</td>
+  <td>Created repo</td>
+</tr>
+<tr>
+  <td>Remote</td>
+  <td><code>git remote add origin</code></td>
+</tr>
+<tr>
+  <td>Branch</td>
+  <td><code>git switch -c</code></td>
+</tr>
+<tr>
+  <td>Commit</td>
+  <td><code>git commit</code></td>
+</tr>
+<tr>
+  <td>Push</td>
+  <td><code>git push</code></td>
+</tr>
+<tr>
+  <td>Pull</td>
+  <td><code>git pull</code></td>
+</tr>
+<tr>
+  <td>Pull Request</td>
+  <td>Created PR</td>
+</tr>
+<tr>
+  <td>GitHub Actions</td>
+  <td>Created workflow</td>
+</tr>
+<tr>
+  <td>Workflow trigger</td>
+  <td><code>push</code>, <code>pull_request</code></td>
+</tr>
+<tr>
+  <td>Job</td>
+  <td><code>test</code></td>
+</tr>
+<tr>
+  <td>Runner</td>
+  <td><code>ubuntu-latest</code></td>
+</tr>
+<tr>
+  <td>Steps</td>
+  <td>Checkout, Python, pytest</td>
+</tr>
+<tr>
+  <td>Unit testing</td>
+  <td><code>pytest</code></td>
+</tr>
+<tr>
+  <td>Quality gate</td>
+  <td>Workflow pass/fail</td>
+</tr>
+<tr>
+  <td>Branch protection</td>
+  <td>Can be configured on <code>main</code></td>
+</tr>
+<tr>
+  <td>Merge</td>
+  <td>PR merged to <code>main</code></td>
+</tr>
+<tr>
+  <td>Tag</td>
+  <td><code>git tag v1.0.0</code></td>
+</tr>
+<tr>
+  <td>GitHub Release</td>
+  <td><code>gh release create</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>🎯 Most Important Commands</h1>
+<h2>Create repository locally</h2>
+<pre><code class="language-bash">git init
+</code></pre>
+<h2>Check status</h2>
+<pre><code class="language-bash">git status
+</code></pre>
+<h2>Create branch</h2>
+<pre><code class="language-bash">git switch -c feature/my-change
+</code></pre>
+<h2>Add changes</h2>
+<pre><code class="language-bash">git add .
+</code></pre>
+<h2>Commit</h2>
+<pre><code class="language-bash">git commit -m &quot;My change&quot;
+</code></pre>
+<h2>Push</h2>
+<pre><code class="language-bash">git push -u origin feature/my-change
+</code></pre>
+<h2>Create PR</h2>
+<pre><code class="language-bash">gh pr create --base main
+</code></pre>
+<h2>Check PR</h2>
+<pre><code class="language-bash">gh pr checks &lt;PR-number&gt;
+</code></pre>
+<h2>See Actions runs</h2>
+<pre><code class="language-bash">gh run list
+</code></pre>
+<h2>Run workflow manually</h2>
+<pre><code class="language-bash">gh workflow run train.yml
+</code></pre>
+<h2>Switch to main</h2>
+<pre><code class="language-bash">git switch main
+</code></pre>
+<h2>Get latest code</h2>
+<pre><code class="language-bash">git pull origin main
+</code></pre>
+<h2>Delete branch</h2>
+<pre><code class="language-bash">git branch -d feature/my-change
+</code></pre>
+<h2>Create tag</h2>
+<pre><code class="language-bash">git tag v1.0.0
+</code></pre>
+<h2>Push tag</h2>
+<pre><code class="language-bash">git push origin v1.0.0
+</code></pre>
+<hr />
+<h1>⭐ Final Mental Model</h1>
+<pre><code class="language-text">LOCAL COMPUTER
+      │
+      │ git init
+      ↓
+    Git
+      │
+      │ git commit
+      ↓
+   Local History
+      │
+      │ git push
+      ↓
+    GITHUB
+      │
+      ├── Repository
+      │
+      ├── Branch
+      │
+      └── Pull Request
+              │
+              ↓
+       GITHUB ACTIONS
+              │
+              ├── Runner
+              │
+              ├── Checkout
+              │
+              ├── Install
+              │
+              └── Test
+                    │
+              ┌─────┴─────┐
+              ↓           ↓
+            PASS         FAIL
+              ↓           ↓
+            Merge       Fix code
+              ↓
+            main
+              ↓
+           Tag v1.0.0
+</code></pre>
+<hr />
+<h1>🚀 Simplest Version for Beginners</h1>
+<pre><code class="language-text">GitHub
+   ↓
+Stores code
+
+Git
+   ↓
+Tracks changes
+
+Branch
+   ↓
+Work safely on a change
+
+Pull Request
+   ↓
+Ask for review
+
+GitHub Actions
+   ↓
+Automates the work
+
+Trigger
+   ↓
+Decides WHEN to run
+
+Runner
+   ↓
+Computer that executes the workflow
+
+Workflow
+   ↓
+Automation instructions
+
+Job
+   ↓
+Unit of work
+
+Steps
+   ↓
+Individual tasks
+
+pytest
+   ↓
+Tests the code
+
+Quality Gate
+   ↓
+Pass / Fail before merge
+
+main
+   ↓
+Stable branch
+
+Tag
+   ↓
+Marks a version
+</code></pre>
+<h1>🏆 Exercise Goal</h1>
+<p>If you can perform this entire sequence without blindly copying commands, you will have a practical foundation for the GitHub portion of an MLOps workflow:</p>
+<blockquote>
+<p><strong>Code → Git → Branch → Commit → Push → PR → GitHub Actions → Test → Merge → Tag</strong></p>
+</blockquote>
+<p><strong>Azure ML is intentionally not involved anywhere in this exercise.</strong></p>
+</div></template><script>
+const storage='github-ops-lab-v1';const original=document.getElementById('source').content.querySelector('#original');const container=document.getElementById('sections');const nav=document.getElementById('nav');let sections=[];let current=null;let n=0;
+for(const el of [...original.children]){if(el.tagName==='H1'){n++;const id='chapter-'+n;const section=document.createElement('section');section.className='section';section.id=id;const head=document.createElement('div');head.className='section-head';const done=document.createElement('input');done.type='checkbox';done.className='done';done.setAttribute('aria-label','Mark chapter completed');const title=document.createElement('span');title.className='section-title';title.textContent=el.textContent;const toggle=document.createElement('button');toggle.className='section-toggle';toggle.textContent='⌄';toggle.setAttribute('aria-label','Expand or collapse chapter');const body=document.createElement('div');body.className='section-body';head.append(done,title,toggle);section.append(head,body);container.append(section);current={section,body,done,title:title.textContent,id};sections.push(current);toggle.addEventListener('click',()=>section.classList.toggle('collapsed'));}else if(current){current.body.append(el.cloneNode(true));}}
+const state=JSON.parse(localStorage.getItem(storage)||'{}');function save(){localStorage.setItem(storage,JSON.stringify({done:sections.filter(s=>s.done.checked).map(s=>s.id),dark:document.body.classList.contains('dark')}));update();}sections.forEach(s=>{s.done.checked=(state.done||[]).includes(s.id);s.done.addEventListener('change',save);const a=document.createElement('a');a.className='navitem';a.href='#'+s.id;a.textContent=s.title;a.onclick=()=>document.getElementById('sidebar').classList.remove('open');nav.append(a);s.link=a;s.body.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.className='copy';b.textContent='Copy';b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(pre.querySelector('code')?.textContent||pre.textContent);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)}catch(e){b.textContent='Select to copy'}});pre.append(b)})});function update(){const count=sections.filter(s=>s.done.checked).length;document.getElementById('counter').textContent=count+' / '+sections.length+' completed';document.getElementById('bar').style.width=(count/Math.max(1,sections.length)*100)+'%'}if(state.dark)document.body.classList.add('dark');update();
+document.getElementById('theme').onclick=()=>{document.body.classList.toggle('dark');document.getElementById('theme').textContent=document.body.classList.contains('dark')?'☀️':'🌙';save()};document.getElementById('theme').textContent=document.body.classList.contains('dark')?'☀️':'🌙';document.getElementById('expand').onclick=()=>sections.forEach(s=>s.section.classList.remove('collapsed'));document.getElementById('collapse').onclick=()=>sections.forEach(s=>s.section.classList.add('collapsed'));document.getElementById('reset').onclick=()=>{if(confirm('Clear completed chapter progress?')){sections.forEach(s=>s.done.checked=false);save()}};document.getElementById('menu').onclick=()=>document.getElementById('sidebar').classList.toggle('open');document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();let matches=0;sections.forEach(s=>{const found=!q||s.section.textContent.toLowerCase().includes(q);s.section.classList.toggle('hidden',!found);s.link.classList.toggle('hidden',!found);if(found){matches++;if(q)s.section.classList.remove('collapsed')}});document.getElementById('empty').classList.toggle('hidden',matches>0);document.getElementById('match').textContent=q?matches+' matching chapters':''});
+const quiz=[['Which command creates a new feature branch?',['git switch -c feature/my-change','git status','git pull origin main'],0,'git switch -c creates and switches to a branch.'],['What starts the test workflow when a PR is updated?',['git tag','pull_request trigger','README.md'],1,'The pull_request event triggers the workflow.'],['Which command runs the Python tests?',['git log','git init','pytest'],2,'pytest executes the tests.'],['Where does a GitHub Actions workflow file belong?',['.github/workflows/','models/','output/'],0,'Workflow YAML files live in .github/workflows/.'],['What should you do after a failed test?',['Merge anyway','Fix the code or test and push again','Delete main'],1,'Fix the failure and rerun the checks before merging.']];function renderQuiz(){const host=document.getElementById('questions');host.innerHTML='';quiz.forEach((item,i)=>{const box=document.createElement('div');box.className='question';const title=document.createElement('strong');title.textContent=(i+1)+'. '+item[0];box.append(title);const feedback=document.createElement('div');feedback.className='feedback';item[1].forEach((answer,j)=>{const label=document.createElement('label');label.className='choice';const radio=document.createElement('input');radio.type='radio';radio.name='q'+i;radio.onchange=()=>{feedback.textContent=(j===item[2]?'✓ Correct. ':'✗ Not quite. ')+item[3];feedback.className='feedback '+(j===item[2]?'correct':'wrong')};label.append(radio,document.createTextNode(' '+answer));box.append(label)});box.append(feedback);host.append(box)})}renderQuiz();document.getElementById('retry').onclick=renderQuiz;
+</script></body></html>
